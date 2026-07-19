@@ -1,5 +1,7 @@
+Configure the workflow using below YAML file:
+
 name: Issues (Script Injection Example)
-on:
+'on':
   issues:
     types:
       - opened
@@ -8,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.1
-
-      - env:
-          issue-title: ${{ github.event.issue.title }}
+      - env: #added
+          issue_title: '${{ github.event.issue.title }}' #added
         run: |
-          issue_title="$issue-title"
           if [[ "$issue_title" == *"bug"* ]]; then
             echo "Issue is about a bug!"
           else
